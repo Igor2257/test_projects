@@ -36,11 +36,12 @@ class _ProcessScreenState extends State<ProcessScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "All calculations has finished, you can send your results to server",
-                style: TextStyle(fontSize: 20),
-                textAlign: TextAlign.center,
-              ),
+              if (state.percentage == 100)
+                const Text(
+                  "All calculations has finished, you can send your results to server",
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
               const SizedBox(
                 height: 24,
               ),
@@ -51,12 +52,14 @@ class _ProcessScreenState extends State<ProcessScreen> {
               const SizedBox(
                 height: 24,
               ),
-              SizedBox(
-                width: size.width / 5,
-                height: size.width / 5,
-                child: CircularProgressIndicator(
-                  value: state.percentage / 100,
-                  color: Colors.blue.shade300,
+              Center(
+                child: SizedBox(
+                  width: size.width / 5,
+                  height: size.width / 5,
+                  child: CircularProgressIndicator(
+                    value: state.percentage / 100,
+                    color: Colors.blue.shade300,
+                  ),
                 ),
               )
             ],

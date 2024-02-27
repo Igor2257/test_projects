@@ -73,6 +73,7 @@ class Repository {
             }
           });
         }
+
         for (var result in newResult) {
           await http
               .post(
@@ -85,7 +86,8 @@ class Repository {
               .then((value) async {
             if (!(value.statusCode > 199 && value.statusCode < 300)) {
               error = value.body;
-              print("value.body ${value.body}");
+              Fluttertoast.showToast(
+                  msg: error.toString(), toastLength: Toast.LENGTH_LONG);
             } else {
               print("value.body ${value.body}");
             }
@@ -93,7 +95,6 @@ class Repository {
         }
       } catch (e) {
         error = e.toString();
-        print(e);
         Fluttertoast.showToast(
             msg: e.toString(), toastLength: Toast.LENGTH_LONG);
       }

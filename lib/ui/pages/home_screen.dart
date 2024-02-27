@@ -13,8 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController apiController =
-      TextEditingController(text: "https://flutter.webspark.dev/flutter/api");
+  final TextEditingController apiController = TextEditingController(text: "");
   final FocusNode apiFocusNode = FocusNode();
 
   @override
@@ -62,13 +61,33 @@ class _HomeScreenState extends State<HomeScreen> {
                   shrinkWrap: true,
                   itemCount: savedUrls.length,
                   itemBuilder: (context, position) {
-                    return Container(
-                      height: 44,
-                      decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide())),
-                      child: Center(
-                        child: Text(savedUrls[position].url),
-                      ),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) => ProcessScreen(
+                              userUrl: savedUrls[position].url,
+                            ),
+                          ),
+                          (route) => true,
+                        );
+                      },
+                      child: Container(
+                          height: 44,
+                          decoration: const BoxDecoration(
+                              border: Border(bottom: BorderSide())),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(savedUrls[position].url),
+                              IconButton(
+                                  onPressed: () {
+                                    BlocProvider.of<AppBloc>(context).add(
+                                        DeleteUrl(id: savedUrls[position].id));
+                                  },
+                                  icon: const Icon(Icons.delete)),
+                            ],
+                          )),
                     );
                   }),
             ],

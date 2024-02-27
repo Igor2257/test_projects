@@ -10,3 +10,8 @@ class AddNewUrl extends AppEvent{
 
   AddNewUrl({required this.url});
 }
+class DeleteUrl extends AppEvent{
+  final String id;
+
+  DeleteUrl({required this.id});
+}

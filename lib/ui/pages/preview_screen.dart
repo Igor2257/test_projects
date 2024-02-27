@@ -103,7 +103,8 @@ class GridCell extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: const TextStyle(color: Colors.black),
+          style: TextStyle(
+              color: color == Colors.black ? Colors.white : Colors.black),
         ),
       ),
     );
